@@ -1,12 +1,12 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const CityContext = createContext()
-
+ const BASE_URL = "http://localhost:8000"
 function CityProvider({ children }) {
 const [cities, setCities] = useState([])
 const [isLoading, setIsLoading] = useState(false)
 
-  const BASE_URL = "http://localhost:8000"
+ 
   const fetch_data = async () => {
     try {
       setIsLoading(true)
@@ -35,5 +35,13 @@ const [isLoading, setIsLoading] = useState(false)
         </CityContext.Provider>
     )
 }
-export {CityProvider}
+
+function useCity() {
+  const context = useContext(CityContext)
+  if (!context) {
+    throw new Error("useCity must be used within a CityProvider")
+  }
+  return context
+}
+export {CityProvider, useCity}
 
