@@ -5,7 +5,9 @@ import CityItem from "./CityItem";
 import Message from "./Message";
 import { useCity } from "../contexts/CityContext";
 function CityList() {
-    const{cities, isLoading} = useCity()
+    const { cities, isLoading } = useCity()
+    console.log('CityList', cities, isLoading);
+    
     if (isLoading) {
     return <Spinner />;
     }
